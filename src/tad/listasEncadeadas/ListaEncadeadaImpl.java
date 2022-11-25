@@ -1,5 +1,7 @@
 package tad.listasEncadeadas;
 
+import tad.util.Conversor;
+
 public class ListaEncadeadaImpl<T extends Comparable<T>> implements ListaEncadeadaIF<T>{
 	
 //	NodoListaEncadeada<T> cabeca = null;
@@ -31,9 +33,8 @@ public class ListaEncadeadaImpl<T extends Comparable<T>> implements ListaEncadea
 
 	@Override
 	public void insert(T chave) {
-//		throw new UnsupportedOperationException("Precisa implementar!");
 		
-		//1. Craiar o novo registro
+		//1. Criar o novo registro
 		NodoListaEncadeada<T> novoNo = new NodoListaEncadeada<T>(chave);
 		
 		//2. Inserir o novo nó na lista
@@ -49,17 +50,25 @@ public class ListaEncadeadaImpl<T extends Comparable<T>> implements ListaEncadea
 	}
 
 	@Override
-	public NodoListaEncadeada<T> remove(T chave) {
-		throw new UnsupportedOperationException("Precisa implementar!");
-		
+	public NodoListaEncadeada<T> remove(T chave) throws ListaVaziaException {
+
+		NodoListaEncadeada<T> novoNo = new NodoListaEncadeada<T>(chave);
+
+		// se a lista estiver vazia**
+		if (cabeca.getProximo().equals(cauda)) {
+			throw new ListaVaziaException();
+		}else{
+			novoNo = novoNo.getProximo();
+			return novoNo;
+		}		
 	}
 
 	@Override
 	public T[] toArray(Class<T> clazz) {
-		// Criar um array usando a classe utilitária conversor
-//		Conversor<T> c = new Conversor<T>();
-//		T[] meuArray = c.gerarArray(clazz, 10);
-		throw new UnsupportedOperationException("Precisa implementar!");
+		Conversor<T> c = new Conversor<T>();
+		T[] meuArray = c.gerarArray(clazz, 10);
+		
+		return meuArray;
 	}
 
 	@Override
